@@ -82,12 +82,7 @@ CreateThread(function()
                 local animalName = Config.HuntingZones[k].animalname
                 local baitName = Config.HuntingZones[k].baitname
                 if Config.HuntingZones[k].enterzone then
-                    if Config.Notify == 'rnotify' then
-                        TriggerEvent('rNotify:NotifyLeft', "You have left a hunting zone! Animal: " .. animalName, "Bait: " ..baitName, "generic_textures", "tick", 4000)
-                    elseif Config.Notify == 'ox_lib' then
-                        lib.notify( {title = "You have left a hunting zone! Animal: " .. animalName, description = "Bait: " ..baitName, type = 'inform' })
                     DeleteBaitProp()
-                    end
                 end
             end
         end)
