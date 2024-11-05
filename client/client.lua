@@ -4,6 +4,7 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 -- prompts
 -------------------------------------------
 local SpawnedTrapperBilps = {}
+lib.locale()
 
 CreateThread(function()
     for _, v in pairs(Config.TrapperLocations) do
@@ -48,7 +49,7 @@ AddEventHandler('qc-advanced-trapper:client:openstore', function()
         if Config.Notify == 'rnotify' then
             TriggerEvent('rNotify:NotifyLeft', "Store Closed", "come back after "..Config.OpenTime.." am", "generic_textures", "tick", 4000)
         elseif Config.Notify == 'ox_lib' then
-            TriggerClientEvent('ox_lib:notify', source, {title = "Store Closed", description = "come back after "..Config.OpenTime.." am", type = 'inform' })
+            lib.notify( {title = "Store Closed", description = "come back after "..Config.OpenTime.." am", type = 'inform' })
         end
         return
     end
@@ -252,14 +253,14 @@ CreateThread(function()
                         if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:Tip', name .. Lang:t('primary.stored'), 4000)
                         elseif Config.Notify == 'ox_lib' then
-                            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
+                            lib.notify( {title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
                         end
                         Wait(5000)
                     else
                         if Config.Notify == 'rnotify' then
                             TriggerEvent('rNotify:Tip', Lang:t('error.something_went_wrong'), 4000)
                         elseif Config.Notify == 'ox_lib' then
-                            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = Lang:t('error.something_went_wrong'), type = 'inform' })
+                            lib.notify( {title = "Hunting", description = Lang:t('error.something_went_wrong'), type = 'inform' })
                         end
                     end
                 elseif Config.Pelts[i].holding and GetEntityModel(holding) == Config.Pelts[i].holding then
@@ -274,7 +275,7 @@ CreateThread(function()
                     if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:Tip', name .. Lang:t('primary.stored'), 4000)
                     elseif Config.Notify == 'ox_lib' then
-                        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
+                        lib.notify({title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
                     end
                    
                 end
