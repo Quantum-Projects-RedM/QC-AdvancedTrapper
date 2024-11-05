@@ -8,19 +8,22 @@ local RSGCore = exports['rsg-core']:GetCoreObject()
 -- Feather REWARDS SHOULD BE rewarditems
 
 
--- store pelt to inventory
+-- store pelt to rsg-inventory
 RegisterNetEvent('qc-advanced-trapper:server:storepelt')
 AddEventHandler('qc-advanced-trapper:server:storepelt', function(rewarditem1)
     local src = source
     local Player = RSGCore.Functions.GetPlayer(src)
     Player.Functions.AddItem(rewarditem1, 1)
-    TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem1], "add")
+    TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem1], "add", 1)
     --RSGCore.Functions.Notify(src, 'You received pelt items', 'success', 4000)
-    TriggerClientEvent('rNotify:NotifyLeft', src, "Hunting", "You received: " ..RSGCore.Shared.Items[rewarditem1], "generic_textures", "tick", 4000)
-
+    if Config.Notify == 'rnotify' then
+        TriggerClientEvent('rNotify:NotifyLeft', src, "Hunting", "You received: " ..rewarditem1, "generic_textures", "tick", 4000)
+    elseif Config.Notify == 'ox_lib' then
+        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You received a: " ..rewarditem1, type = 'inform' })
+    end
 end)
 
--- store carcass to inventory
+-- store carcass to rsg-inventory
 RegisterNetEvent('qc-advanced-trapper:server:storecarcass')
 AddEventHandler('qc-advanced-trapper:server:storecarcass', function(rewarditem2, rewarditem3, rewarditem4, rewarditem5)
     local src = source
@@ -33,38 +36,50 @@ AddEventHandler('qc-advanced-trapper:server:storecarcass', function(rewarditem2,
     if rewarditem2 ~= nil then
         if chance2 > 50 then -- chance variable
             Player.Functions.AddItem(rewarditem2, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem2], "add")
-            --RSGCore.Functions.Notify(src, 'You received a animal pelt', 'success', 4000)
-            TriggerClientEvent('rNotify:Tip', source, "You received a: " ..RSGCore.Shared.Items[rewarditem2], 4000)
+            TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem2], "add", 1)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:NotifyLeft', source, "You received a: " ..rewarditem2, "generic_textures", "tick", 4000)
+            elseif Config.Notify == "ox_lib" then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You received a: " ..rewarditem2, type = 'inform' })
         end
     end
 
     if rewarditem3 ~= nil then
         if chance3 > 50 then -- chance variable
             Player.Functions.AddItem(rewarditem3, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem3], "add")
-            --RSGCore.Functions.Notify(src, 'You received animal fat', 'success', 4000)
-            TriggerClientEvent('rNotify:Tip', source, "You received a: " ..RSGCore.Shared.Items[rewarditem3], 4000)
+                TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem3], "add", 1)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:NotifyLeft', source, rewarditem3, "generic_textures", "tick", 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You received a: " ..rewarditem3, type = 'inform' })
+            end
         end
     end
 
     if rewarditem4 ~= nil then
         if chance4 > 50 then -- chance variable
             Player.Functions.AddItem(rewarditem4, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem4], "add")
-            --RSGCore.Functions.Notify(src, 'You received animal parts', 'success', 4000)
-            TriggerClientEvent('rNotify:Tip', source, "You received a: " ..RSGCore.Shared.Items[rewarditem4], 4000)
+                TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem4], "add", 1)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:NotifyLeft', source, rewarditem4, "generic_textures", "tick", 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You received a: " ..rewarditem4, type = 'inform' })
+            end
         end
     end
 
     if rewarditem5 ~= nil then
         if chance5 > 50 then -- chance variable --feathers
             Player.Functions.AddItem(rewarditem5, 1)
-            TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem5], "add")
-            --RSGCore.Functions.Notify(src, 'You received feather items', 'success', 4000)
-            TriggerClientEvent('rNotify:Tip', source, "You received a: " ..RSGCore.Shared.Items[rewarditem5], 4000)
+                TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[rewarditem5], "add", 1)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:NotifyLeft', source, rewarditem5, "generic_textures", "tick", 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You received a: " ..rewarditem5, type = 'inform' })
+            end
         end
     end
+end
 end)
 
 RegisterNetEvent('qc-advanced-trapper:server:storefeathers')
@@ -74,19 +89,19 @@ AddEventHandler('qc-advanced-trapper:server:storefeathers', function(giveItem2, 
 
     if giveItem2 then
         Player.Functions.AddItem(giveItem2, 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem2], "add")
+        TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem2], "add", 1)
     end
     if giveItem3 then
         Player.Functions.AddItem(giveItem3, 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem3], "add")
+        TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem3], "add", 1)
     end
     if giveItem4 then
         Player.Functions.AddItem(giveItem4, 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem4], "add")
+        TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem4], "add", 1)
     end
     if giveItem5 then
         Player.Functions.AddItem(giveItem5, 1)
-        TriggerClientEvent('inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem5], "add")
+        TriggerClientEvent('rsg-inventory:client:ItemBox', src, RSGCore.Shared.Items[giveItem5], "add", 1)
     end
 end)
 
@@ -538,12 +553,18 @@ AddEventHandler('qc-advanced-trapper:server:sellpelts', function()
         end
         if haspelts == true then
             Player.Functions.AddMoney(Config.PaymentType, price, "pelts-sold")
-            --RSGCore.Functions.Notify(source, Lang:t('success.you_have_sold_all_your_pelts_for')..price, 'success')
+            if Config.Notify == 'rnotify' then
             TriggerClientEvent('rNotify:Tip', source, Lang:t('success.you_have_sold_all_your_pelts_for')..price, 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('success.you_have_sold_all_your_pelts_for')..price, type = 'inform' })
+            end
             haspelts = false
         else
-            --RSGCore.Functions.Notify(source, Lang:t('error.you_dont_have_any_pelts_to_sell'), 'error')
+            if Config.Notify == 'rnotify' then
             TriggerClientEvent('rNotify:Tip', source, Lang:t('error.you_dont_have_any_pelts_to_sell'), 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('error.you_dont_have_any_pelts_to_sell'), type = 'inform' })
+            end
         end
     end
 end)
@@ -890,12 +911,18 @@ AddEventHandler('qc-advanced-trapper:server:sellcarcass', function()
         end
         if hascarcass == true then
             Player.Functions.AddMoney(Config.PaymentType, price, "carcass-sold")
-            --RSGCore.Functions.Notify(source, Lang:t('success.you_have_sold_all_your_carcass_for')..price, '')
+            if Config.Notify == 'rnotify' then
             TriggerClientEvent('rNotify:Tip', source, Lang:t('success.you_have_sold_all_your_carcass_for') ..price, 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('success.you_have_sold_all_your_carcass_for')..price, type = 'inform' })
+            end
             hascarcass = false
         else
-            --RSGCore.Functions.Notify(source, Lang:t('error.you_dont_have_any_carcass_to_sell'), '')
+            if Config.Notify == 'rnotify' then
             TriggerClientEvent('rNotify:Tip', source, Lang:t('error.you_dont_have_any_carcass_to_sell'), 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('error.you_dont_have_any_carcass_to_sell'), type = 'inform' })
+            end
         end
     end
 end)
@@ -918,12 +945,18 @@ AddEventHandler('qc-advanced-trapper:server:sellfeathers', function()
         end
         if hasfeathers == true then
             Player.Functions.AddMoney(Config.PaymentType, price, "feathers-sold")
-            --RSGCore.Functions.Notify(source, Lang:t('success.you_have_sold_all_your_feathers_for')..price, '')
-            TriggerClientEvent('rNotify:Tip', source, Lang:t('success.you_have_sold_all_your_feathers_for')..price, 4000)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:Tip', source, Lang:t('success.you_have_sold_all_your_feathers_for')..price, 4000)
+            elseif Config.Notify 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('success.you_have_sold_all_your_feathers_for')..price, type = 'inform' })
             hasfeathers = false
         else
-            --RSGCore.Functions.Notify(source, Lang:t('error.you_dont_have_any_feathers_to_sell'), '')
-            TriggerClientEvent('rNotify:Tip', source, Lang:t('error.you_dont_have_any_feathers_to_sell'), 4000)
+            if Config.Notify == 'rnotify' then
+                TriggerClientEvent('rNotify:Tip', source, Lang:t('error.you_dont_have_any_feathers_to_sell'), 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Trapper", description = Lang:t('error.you_dont_have_any_feathers_to_sell'), type = 'inform' })
+                end
+            end
         end
     end
 end)
