@@ -45,7 +45,11 @@ end)
 AddEventHandler('qc-advanced-trapper:client:openstore', function()
     local hour = GetClockHours()
     if (hour < Config.OpenTime) or (hour >= Config.CloseTime) then
-        TriggerEvent('rNotify:NotifyLeft', "Store Closed", "come back after "..Config.OpenTime.." am", "generic_textures", "tick", 4000)
+        if Config.Notify == 'rnotify' then
+            TriggerEvent('rNotify:NotifyLeft', "Store Closed", "come back after "..Config.OpenTime.." am", "generic_textures", "tick", 4000)
+        elseif Config.Notify == 'ox_lib' then
+            TriggerClientEvent('ox_lib:notify', source, {title = "Store Closed", description = "come back after "..Config.OpenTime.." am", type = 'inform' })
+        end
         return
     end
     TriggerEvent('qc-advanced-trapper:client:menu')
@@ -245,10 +249,18 @@ CreateThread(function()
                     if deleted then
                         TriggerServerEvent('qc-advanced-trapper:server:storepelt', rewarditem1)
                         TriggerServerEvent('qc-advanced-trapper:server:storecarcass', rewarditem2, rewarditem3, rewarditem4)
+                        if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:Tip', name .. Lang:t('primary.stored'), 4000)
+                        elseif Config.Notify == 'ox_lib' then
+                            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
+                        end
                         Wait(5000)
                     else
-                        TriggerEvent('rNotify:Tip', Lang:t('error.something_went_wrong'), 4000)
+                        if Config.Notify == 'rnotify' then
+                            TriggerEvent('rNotify:Tip', Lang:t('error.something_went_wrong'), 4000)
+                        elseif Config.Notify == 'ox_lib' then
+                            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = Lang:t('error.something_went_wrong'), type = 'inform' })
+                        end
                     end
                 elseif Config.Pelts[i].holding and GetEntityModel(holding) == Config.Pelts[i].holding then
                     local name = Config.Pelts[i].name
@@ -259,7 +271,12 @@ CreateThread(function()
                     Wait(5000)
                     TriggerServerEvent('qc-advanced-trapper:server:storepelt', rewarditem1) -- PELT REWARDS
                     TriggerServerEvent('qc-advanced-trapper:server:storecarcass', rewarditem2, rewarditem3, rewarditem4) -- PELT REWARDS
-                    TriggerEvent('rNotify:Tip', name .. Lang:t('primary.stored'), 4000)
+                    if Config.Notify == 'rnotify' then
+                        TriggerEvent('rNotify:Tip', name .. Lang:t('primary.stored'), 4000)
+                    elseif Config.Notify == 'ox_lib' then
+                        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = name .. Lang:t('primary.stored'), type = 'inform' })
+                    end
+                   
                 end
             end
         end
