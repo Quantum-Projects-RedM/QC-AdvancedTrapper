@@ -15,6 +15,7 @@ shared_scripts {
     'config.lua',
     'locales/en.lua',
     'locales/*.lua',
+    '@ox_lib/init.lua',
 }
 
 client_scripts {
@@ -31,16 +32,6 @@ server_scripts {
 dependencies {
     'rsg-core',
     'rsg-menu'
-}
-
-escrow_ignore {
-	'config.lua',
-	'install/npc.lua',
-	'install/shared_items.lua',
-    'locales/en.lua',
-    'locales/es.lua',
-	'images/**.png',
-	
 }
 
 lua54 'yes'
