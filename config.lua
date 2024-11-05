@@ -12,6 +12,9 @@ Config.AnimalWait = 10000 -- the amount of time in miliseconds that the animal w
 Config.KeyShop = 'J'
 Config.OpenTime = 9 -- hrs : 24hour clock
 Config.CloseTime = 18 -- hrs : 24hour clock
+
+Config.Notify = "ox_lib"  --oxlib or rnotify
+
 Config.Blip = {
     blipName = 'Trapper\'s', -- Config.Blip.blipName
     blipSprite = 'blip_shop_animal_trapper', -- Config.Blip.blipSprite
