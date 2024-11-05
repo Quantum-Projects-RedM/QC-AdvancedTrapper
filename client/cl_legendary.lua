@@ -41,8 +41,11 @@ AddEventHandler('qc-advanced-trapper:client:cooldownMessage', function(remaining
     local remainingSeconds = remainingCooldown % 60
     local totalMinutes = math.floor(totalCooldown / 60)
     local totalSeconds = totalCooldown % 60
-   -- RSGCore.Functions.Notify('You need to wait ' .. remainingMinutes .. ' minutes and ' .. remainingSeconds .. ' seconds before hunting in this zone again. (Total cooldown: ' .. totalMinutes .. ' minutes and ' .. totalSeconds .. ' seconds)', 'error')
-    TriggerEvent('rNotify:NotifyLeft', "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", "Hunting Zones", "generic_textures", "tick", 4000)
+    if Config.Notify == 'rnotify' then
+        TriggerEvent('rNotify:NotifyLeft', "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", "Hunting Zones", "generic_textures", "tick", 4000)
+    elseif Config.Notify == 'ox_lib' then
+        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", type = 'inform' })
+    end
 end)
 
 ----------------------------------------  FUNCTIONS  ----------------------------------------------------------
@@ -67,8 +70,11 @@ CreateThread(function()
                 local animal = Config.HuntingZones[k].animalname
                 local bait = Config.HuntingZones[k].baitname
                 if Config.HuntingZones[k].enterzone then
-                    --RSGCore.Functions.Notify('You have entered a hunting zone! Animal: ' .. animal .. ' Bait: ' .. bait, 'primary')
-                    TriggerEvent('rNotify:NotifyLeft', "You have entered a hunting zone! Animal: " .. animal, "Bait: " ..bait, "generic_textures", "tick", 4000)
+                    if Config.Notify == 'rnotify' then
+                        TriggerEvent('rNotify:NotifyLeft', "You have entered a hunting zone! Animal: " .. animal, "Bait: " ..bait, "generic_textures", "tick", 4000)
+                    elseif Config.Notify == 'ox_lib' then
+                        TriggerClientEvent('ox_lib:notify', source, {title = "You have entered a hunting zone! Animal: " .. animal, description = "Bait: " ..bait, type = 'inform' })
+                    end
                 end
             else
                 inHuntingZone = false
@@ -76,9 +82,12 @@ CreateThread(function()
                 local animalName = Config.HuntingZones[k].animalname
                 local baitName = Config.HuntingZones[k].baitname
                 if Config.HuntingZones[k].enterzone then
-                    --Removed notification as on restarts it notifies all locations 
-                    TriggerEvent('rNotify:NotifyLeft', "You have left a hunting zone! Animal: " .. animalName, "Bait: " ..baitName, "generic_textures", "tick", 4000)
+                    if Config.Notify == 'rnotify' then
+                        TriggerEvent('rNotify:NotifyLeft', "You have left a hunting zone! Animal: " .. animalName, "Bait: " ..baitName, "generic_textures", "tick", 4000)
+                    elseif Config.Notify == 'ox_lib' then
+                        TriggerClientEvent('ox_lib:notify', source, {title = "You have left a hunting zone! Animal: " .. animalName, description = "Bait: " ..baitName, type = 'inform' })
                     DeleteBaitProp()
+                    end
                 end
             end
         end)
@@ -136,9 +145,12 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
                     local remainingCooldown = currentZone.timer * 60 - elapsedTime
                     local remainingMinutes = math.floor(remainingCooldown / 60)
                     local remainingSeconds = math.floor(remainingCooldown % 60)
-                    --RSGCore.Functions.Notify('You need to wait ' .. remainingMinutes .. ' minutes and ' .. remainingSeconds .. ' seconds before using the bait again.', 'error')
-                    TriggerEvent('rNotify:NotifyLeft', "Hunting Zones", "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", "generic_textures", "tick", 4000)
-                    return
+                    if Config.Notify == 'rnotify' then
+                        TriggerEvent('rNotify:NotifyLeft', "Hunting Zones", "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", "generic_textures", "tick", 4000)
+                    elseif Config.Notify == 'ox_lib' then
+                        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", type = 'inform' })
+                    end
+                        return
                 end
                 baitLocation = GetEntityCoords(PlayerPedId())
                 spawnLocation = getSpawnLoc()
@@ -162,7 +174,11 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
 
                 remainingCooldowns[currentZone.name] = currentTime + currentZone.timer * 60
                 TriggerServerEvent('qc-advanced-trapper:server:updateCooldown', currentZone.name, remainingCooldowns[currentZone.name])
-                TriggerEvent('rNotify:NotifyLeft', "Bait has been set, hide and wait for the animal! ", "Hunting Zones", "generic_textures", "tick", 4000)
+                if Config.Notify == 'rnotify' then
+                    TriggerEvent('rNotify:NotifyLeft', "Bait has been set, hide and wait for the animal! ", "Hunting Zones", "generic_textures", "tick", 4000)
+                elseif Config.Notify == 'ox_lib' then
+                    TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "Bait has been set, hide and wait for the animal! ", type = 'inform' })
+                end
                 Wait(Config.HideTime)
                 local spawnanimal = currentZone.animal
                 local model = spawnanimal
@@ -193,16 +209,25 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
                     end
                 end)
             else
-                --RSGCore.Functions.Notify('You can\'t use this bait in this hunting zone!', 'error')
-                TriggerEvent('rNotify:NotifyLeft', "You can\'t use this bait in this hunting zone!", "Hunting Zones", "generic_textures", "tick", 4000)
+                if Config.Notify == 'rnotify' then
+                    TriggerEvent('rNotify:NotifyLeft', "You can\'t use this bait in this hunting zone!", "Hunting Zones", "generic_textures", "tick", 4000)
+                elseif Config.Notify == 'ox_lib' then
+                    TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You can\'t use this bait in this hunting zone!", type = 'inform' })
+                end
             end
         else
-            --RSGCore.Functions.Notify('Failed to find current hunting zone.', 'error')
+            if Config.Notify == 'rnotify' then
             TriggerEvent('rNotify:NotifyLeft', "Failed to find current hunting zone.", "Hunting Zones", "generic_textures", "tick", 4000)
+            elseif Config.Notify == 'ox_lib' then
+                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "Failed to find current hunting zone.", type = 'inform' })
+            end
         end
     else
-        --RSGCore.Functions.Notify('You can\'t use that outside a hunting zone!', 'error')
+        if Config.Notify == 'rnotify' then
         TriggerEvent('rNotify:NotifyLeft', "You can\'t use that outside a hunting zone!", "Hunting Zones", "generic_textures", "tick", 4000)
+        elseif Config.Notify == 'ox_lib' then
+            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You can\'t use that outside a hunting zone!", type = 'inform' })
+        end
     end
 end)
 
