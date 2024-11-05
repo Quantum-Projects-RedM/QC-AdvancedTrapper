@@ -44,7 +44,7 @@ AddEventHandler('qc-advanced-trapper:client:cooldownMessage', function(remaining
     if Config.Notify == 'rnotify' then
         TriggerEvent('rNotify:NotifyLeft', "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", "Hunting Zones", "generic_textures", "tick", 4000)
     elseif Config.Notify == 'ox_lib' then
-        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", type = 'inform' })
+        lib.notify( {title = "Hunting", description = "You need to wait ".. remainingMinutes .. " minutes and ".. remainingSeconds .. " seconds before hunting in this zone again. (Total cooldown: " .. totalMinutes .. " minutes and " .. totalSeconds .. " seconds)", type = 'inform' })
     end
 end)
 
@@ -73,7 +73,7 @@ CreateThread(function()
                     if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:NotifyLeft', "You have entered a hunting zone! Animal: " .. animal, "Bait: " ..bait, "generic_textures", "tick", 4000)
                     elseif Config.Notify == 'ox_lib' then
-                        TriggerClientEvent('ox_lib:notify', source, {title = "You have entered a hunting zone! Animal: " .. animal, description = "Bait: " ..bait, type = 'inform' })
+                        lib.notify( {title = "You have entered a hunting zone! Animal: " .. animal, description = "Bait: " ..bait, type = 'inform' })
                     end
                 end
             else
@@ -85,7 +85,7 @@ CreateThread(function()
                     if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:NotifyLeft', "You have left a hunting zone! Animal: " .. animalName, "Bait: " ..baitName, "generic_textures", "tick", 4000)
                     elseif Config.Notify == 'ox_lib' then
-                        TriggerClientEvent('ox_lib:notify', source, {title = "You have left a hunting zone! Animal: " .. animalName, description = "Bait: " ..baitName, type = 'inform' })
+                        lib.notify( {title = "You have left a hunting zone! Animal: " .. animalName, description = "Bait: " ..baitName, type = 'inform' })
                     DeleteBaitProp()
                     end
                 end
@@ -148,7 +148,7 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
                     if Config.Notify == 'rnotify' then
                         TriggerEvent('rNotify:NotifyLeft', "Hunting Zones", "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", "generic_textures", "tick", 4000)
                     elseif Config.Notify == 'ox_lib' then
-                        TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", type = 'inform' })
+                        lib.notify( {title = "Hunting Zones", description = "You need to wait :" .. remainingMinutes .. "minutes and" .. remainingSeconds .."seconds before using the bait again", type = 'inform' })
                     end
                         return
                 end
@@ -177,7 +177,7 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
                 if Config.Notify == 'rnotify' then
                     TriggerEvent('rNotify:NotifyLeft', "Bait has been set, hide and wait for the animal! ", "Hunting Zones", "generic_textures", "tick", 4000)
                 elseif Config.Notify == 'ox_lib' then
-                    TriggerClientEvent('ox_lib:notify', source, {title = "Hunting", description = "Bait has been set, hide and wait for the animal! ", type = 'inform' })
+                    lib.notify( {title = "Hunting", description = "Bait has been set, hide and wait for the animal! ", type = 'inform' })
                 end
                 Wait(Config.HideTime)
                 local spawnanimal = currentZone.animal
@@ -212,21 +212,21 @@ AddEventHandler('qc-advanced-trapper:server:useHuntingBait', function(item)
                 if Config.Notify == 'rnotify' then
                     TriggerEvent('rNotify:NotifyLeft', "You can\'t use this bait in this hunting zone!", "Hunting Zones", "generic_textures", "tick", 4000)
                 elseif Config.Notify == 'ox_lib' then
-                    TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You can\'t use this bait in this hunting zone!", type = 'inform' })
+                    lib.notify( {title = "Hunting Zones", description = "You can\'t use this bait in this hunting zone!", type = 'inform' })
                 end
             end
         else
             if Config.Notify == 'rnotify' then
             TriggerEvent('rNotify:NotifyLeft', "Failed to find current hunting zone.", "Hunting Zones", "generic_textures", "tick", 4000)
             elseif Config.Notify == 'ox_lib' then
-                TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "Failed to find current hunting zone.", type = 'inform' })
+                lib.notify( {title = "Hunting Zones", description = "Failed to find current hunting zone.", type = 'inform' })
             end
         end
     else
         if Config.Notify == 'rnotify' then
         TriggerEvent('rNotify:NotifyLeft', "You can\'t use that outside a hunting zone!", "Hunting Zones", "generic_textures", "tick", 4000)
         elseif Config.Notify == 'ox_lib' then
-            TriggerClientEvent('ox_lib:notify', source, {title = "Hunting Zones", description = "You can\'t use that outside a hunting zone!", type = 'inform' })
+            lib.notify( {title = "Hunting Zones", description = "You can\'t use that outside a hunting zone!", type = 'inform' })
         end
     end
 end)
