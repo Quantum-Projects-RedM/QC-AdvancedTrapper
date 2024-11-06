@@ -89,6 +89,7 @@ end)
 -- trapper menu
 RegisterNetEvent('qc-advanced-trapper:client:menu', function()
     print("THIS WAS MADE WITH LOVE BY Pablo Enterprises")
+    if Config.Menu == 'rsg-menu' then
     exports['rsg-menu']:openMenu({
         {
             header =  Lang:t('menu.trapper_menu'),
@@ -130,6 +131,37 @@ RegisterNetEvent('qc-advanced-trapper:client:menu', function()
             }
         },
     })
+elseif Config.Menu == 'ox_lib' then
+            -- Menu would go here.
+        lib.registerContext({
+            id = 'trapper_menu',
+            title = Lang:t('menu.trapper_menu'),
+            options = {
+                {
+                    title = Lang:t('menu.sell_stored_pelts'),
+                    description = Lang:t('text.sell_store_pelts'),
+                    icon = 'fas fa-paw',
+                    event = 'qc-advanced-trapper:client:sellpelts',
+                    arrow = true
+                },
+                {
+                    title = Lang:t('menu.sell_stored_carcass'),
+                    description = Lang:t('menu.sell_stored_carcass'),
+                    icon = 'fas fa-horse',
+                    event = 'qc-advanced-trapper:client:sellcarcass',
+                    arrow = true
+                },
+                {
+                    title = Lang:t('menu.sell_stored_feathers'),
+                    description = Lang:t('menu.sell_stored_feathers'),
+                    icon = 'fas fa-feather',
+                    event = 'qc-advanced-trapper:client:sellfeathers',
+                    arrow = true
+                }
+            }
+        })
+        lib.showContext('trapper_menu')
+    end
 end)
 
 -------------------------------------------
