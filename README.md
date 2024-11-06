@@ -38,6 +38,7 @@ A remade version of rsg-trapperplus. Giving the ability for looting all creature
 # Starting the resource
 - add the following to your server.cfg file : ensure qc-advanced-trapper
 
+# Menu details
 
 ![image](https://github.com/user-attachments/assets/bd2c9c7c-eebc-495f-9b23-3f7361c2c87f)
 
