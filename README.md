@@ -1,5 +1,7 @@
 # QC-advanced-trapper
 A remade version of rsg-trapperplus. Giving the ability for looting all creatures in RedM
+# YOU CAN NOW CHOOSE TO USE OXLIB or RSG-MENU for the script through the config :)
+
 - Separate pictures for different pelts and levels
 - Multiple loot items
 - Configurable loot chance
@@ -20,8 +22,8 @@ A remade version of rsg-trapperplus. Giving the ability for looting all creature
 - rsg-trapperplus : https://github.com/Rexshack-RedM/rsg-trapperplus
 
 # Dependancies
-- rsg-core
-- rsg-menu                --Use my Menu for better look overall : https://github.com/Artmines/rsg-menu
+- rsg-core 
+- rsg-menu  or ox_lib              --Use my Menu for better look overall : https://github.com/Artmines/rsg-menu
 
 # Installation
 - remove rsg-holding if you have it added
@@ -37,6 +39,7 @@ A remade version of rsg-trapperplus. Giving the ability for looting all creature
 - add the following to your server.cfg file : ensure qc-advanced-trapper
 
 
+![image](https://github.com/user-attachments/assets/577eab8c-08b8-4136-84e2-03bf4a22269a)
 
 
 ### IMPORTANT TO USE DEBUG THE GAME HAS OVER 450+ ANIMALS/PELTS HELP BY CONTRIBUTING TO THE RESOURCE THANKS!
