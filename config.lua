@@ -13,7 +13,15 @@ Config.KeyShop = 'J'
 Config.OpenTime = 9 -- hrs : 24hour clock
 Config.CloseTime = 18 -- hrs : 24hour clock
 
+
+--------------------------------------------
+---IMPORTANT
+--------------------------------------------
 Config.Notify = "ox_lib"  --oxlib or rnotify
+Config.Menu = "ox_lib" --oxlib
+--------------------------------------------
+---IMPORTANT
+--------------------------------------------
 
 Config.Blip = {
     blipName = 'Trapper\'s', -- Config.Blip.blipName
@@ -187,42 +195,42 @@ Config.TrapperLocations = {
 }
 
 Config.SpawnAnimal = {
-	[1] = { ["Model"] = "mp_a_c_beaver_01", 	["Pos"] = vector3(-1182.29, 1063.17, 166.02 -1),		["Heading"] = 0.0 },
-	[2] = { ["Model"] = "mp_a_c_cougar_01", 	["Pos"] = vector3(-2081.77, -175.32, 202.03 -1),		["Heading"] = 173.33 },
-	[3] = { ["Model"] = "mp_a_c_alligator_01", 	["Pos"] = vector3(2341.46, -545.29, 41.92 -1),			["Heading"] = 139.76 },
-	[4] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(1115.52, 1897.05, 327.23 -1),			["Heading"] = 190.96 },
-	[5] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(979.01, -1229.21, 60.01 -1),			["Heading"] = 124.6 },
-	[6] = { ["Model"] = "mp_a_c_wolf_01", 		["Pos"] = vector3(-627.36, 528.5, 97.01 -1),			["Heading"] = 299.06 },
-	[7] = { ["Model"] = "mp_a_c_boar_01", 		["Pos"] = vector3(-1854.97, -1598.9, 107.29 -1),		["Heading"] = 341.83 },
-	[8] = { ["Model"] = "mp_a_c_beaver_01", 	["Pos"] = vector3(-2357.043, -474.8927, 142.01301 -1),	["Heading"] = 1.227958 },
-	[9] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(1456.3269, -7087.985, 75.894462 -1),	["Heading"] = 34.374881 }, -- guarma
-	[10] = { ["Model"] = "mp_a_c_cougar_01", 	["Pos"] = vector3(1261.06, 1190.20, 147.40 -1),			["Heading"] = 34.374881 }, -- Ponf Bears
+	[1] = { ["Model"] = "mp_a_c_beaver_01", 	["Pos"] = vector3(-1182.29, 1063.17, 166.02 -1),		["Heading"] = 0.0, ["SpawnDistance"] = 120.0},
+	[2] = { ["Model"] = "mp_a_c_cougar_01", 	["Pos"] = vector3(-2081.77, -175.32, 202.03 -1),		["Heading"] = 173.33, ["SpawnDistance"] = 120.0 },
+	[3] = { ["Model"] = "mp_a_c_alligator_01", 	["Pos"] = vector3(2341.46, -545.29, 41.92 -1),			["Heading"] = 139.76, ["SpawnDistance"] = 120.0 },
+	[4] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(1115.52, 1897.05, 327.23 -1),			["Heading"] = 190.96, ["SpawnDistance"] = 120.0 },
+	[5] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(979.01, -1229.21, 60.01 -1),			["Heading"] = 124.6, ["SpawnDistance"] = 120.0 },
+	[6] = { ["Model"] = "mp_a_c_wolf_01", 		["Pos"] = vector3(-627.36, 528.5, 97.01 -1),			["Heading"] = 299.06, ["SpawnDistance"] = 120.0 },
+	[7] = { ["Model"] = "mp_a_c_boar_01", 		["Pos"] = vector3(-1854.97, -1598.9, 107.29 -1),		["Heading"] = 341.83, ["SpawnDistance"] = 120.0 },
+	[8] = { ["Model"] = "mp_a_c_beaver_01", 	["Pos"] = vector3(-2357.043, -474.8927, 142.01301 -1),	["Heading"] = 1.227958, ["SpawnDistance"] = 120.0 },
+	[9] = { ["Model"] = "mp_a_c_panther_01", 	["Pos"] = vector3(1456.3269, -7087.985, 75.894462 -1),	["Heading"] = 34.374881, ["SpawnDistance"] = 120.0 }, -- guarma
+	[10] = { ["Model"] = "mp_a_c_cougar_01", 	["Pos"] = vector3(1261.06, 1190.20, 147.40 -1),			["Heading"] = 34.374881, ["SpawnDistance"] = 120.0 }, -- Ponf Bears
 	-- Diamonds 
-	[12] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(-2723.47, 725.09, 171.32 -1),			["Heading"] = -7.84 }, -- Ponf Bears
-	[13] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(-2130.42, 124.52, 236.62 -1),			["Heading"] = 137.71 }, -- Ponf Bears
+	[12] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(-2723.47, 725.09, 171.32 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, -- Ponf Bears
+	[13] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(-2130.42, 124.52, 236.62 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Ponf Bears
 	
 --Rubys
-	[14] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84 }, --snake
-	[15] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71 }, -- Snake
-	[16] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84 }, --snake
-	[17] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71 }, -- Snake
-	[18] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84 }, --snake
-	[19] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71 }, -- Snake
-	[20] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84 }, --snake
-	[21] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71 }, -- Snake
+	[14] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[15] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[16] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[17] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[18] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[19] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[20] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[21] = { ["Model"] = "a_c_snake_01", 	["Pos"] = vector3(2317.41455078125, 1137.5675048828125, 96.38571166992188 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
 
-	[22] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84 }, --snake
-	[23] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71 }, -- Snake
-	[24] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84 }, --snake
-	[25] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71 }, -- Snake
-	[26] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84 }, --snake
-	[27] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71 }, -- Snake
-	[28] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84 }, --snake
-	[29] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71 }, -- Snake
+	[22] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[23] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[24] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[25] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[26] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[27] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
+	[28] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = -7.84, ["SpawnDistance"] = 120.0 }, --snake
+	[29] = { ["Model"] = "a_c_snakeblacktailrattle_01", 	["Pos"] = vector3(2304.051025390625, 1135.0902099609375, 96.23624420166016 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Snake
 	
-	[30] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(2325.337158203125, 1072.4620361328125, 93.56884765625 -1),			["Heading"] = 137.71 }, -- Ponf Bears
+	[30] = { ["Model"] = "mp_a_c_bear_01", 	["Pos"] = vector3(2325.337158203125, 1072.4620361328125, 93.56884765625 -1),			["Heading"] = 137.71, ["SpawnDistance"] = 120.0 }, -- Ponf Bears
 
-	[31] = { ["Model"] = "mp_a_c_alligator_01", 	["Pos"] = vector3(2364.126953125, 995.9747314453125, 73.90508270263672 -1),			["Heading"] = 139.76 }, -- Gator["Heading"] = 137.71 }, -- Ponf Bears
+	[31] = { ["Model"] = "mp_a_c_alligator_01", 	["Pos"] = vector3(2364.126953125, 995.9747314453125, 73.90508270263672 -1),			["Heading"] = 139.76, ["SpawnDistance"] = 120.0 }, -- Gator["Heading"] = 137.71 }, -- Ponf Bears
 }
 
 Config.TrapperShop = {
