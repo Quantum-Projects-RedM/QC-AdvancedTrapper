@@ -6,6 +6,7 @@ local baitLocation = nil
 local spawnLocation = nil
 local animal = {}
 local baitProp = nil
+local spawnedAnimals = {}
 
 
 local remainingCooldowns = {}
@@ -16,21 +17,38 @@ function modelrequest( model )
     end)
 end
 
--- load animal
 Citizen.CreateThread(function()
-    for z, x in pairs(Config.SpawnAnimal) do
-    while not HasModelLoaded( GetHashKey(Config.SpawnAnimal[z]["Model"]) ) do
-        Wait(500)
-        modelrequest( GetHashKey(Config.SpawnAnimal[z]["Model"]) )
-    end
-    local npc = CreatePed(GetHashKey(Config.SpawnAnimal[z]["Model"]), Config.SpawnAnimal[z]["Pos"].x, Config.SpawnAnimal[z]["Pos"].y, Config.SpawnAnimal[z]["Pos"].z, Config.SpawnAnimal[z]["Heading"], true, true, 0, 0)
-    while not DoesEntityExist(npc) do
-        Wait(300)
-    end
-    Citizen.InvokeNative(0x283978A15512B2FE, npc, true)
-	Citizen.InvokeNative(0xDC19C288082E586E, npc, true, false)
-	Citizen.InvokeNative(0xBB9CE077274F6A1B, npc, 10.0, 10)
-    SetModelAsNoLongerNeeded(GetHashKey(Config.SpawnAnimal[z]["Model"]))
+    while true do
+        local playerPos = GetEntityCoords(PlayerPedId())
+        for z, animal in pairs(Config.SpawnAnimal) do
+            local animalPos = animal["Pos"]
+            local dist = #(playerPos - animalPos)
+            local spawnDistance = animal["spawnDistance"] or 120 --- just in case you dont set in Config ;)
+
+            if dist < spawnDistance and not spawnedAnimals[z] then
+                if not HasModelLoaded(GetHashKey(animal["Model"])) then
+                    RequestModel(GetHashKey(animal["Model"]))
+                    while not HasModelLoaded(GetHashKey(animal["Model"])) do
+                        Wait(500)
+                    end
+                end
+                local npc = CreatePed(4, GetHashKey(animal["Model"]), animalPos.x, animalPos.y, animalPos.z, animal["Heading"], true, true)
+                Citizen.InvokeNative(0x283978A15512B2FE, npc, true)
+                Citizen.InvokeNative(0xDC19C288082E586E, npc, true, false)
+                Citizen.InvokeNative(0xBB9CE077274F6A1B, npc, 10.0, 10)
+                SetModelAsNoLongerNeeded(GetHashKey(animal["Model"]))
+                spawnedAnimals[z] = npc -- Track the spawned animal
+                if Config.Notify == 'rnotify' then
+                    TriggerEvent('rNotify:NotifyLeft', "Legendary Spotted!", "You have entered legendary animal territory!", "generic_textures", "tick", 4000)
+                elseif Config.Notify == 'ox_lib' then
+                    lib.notify( {title = "Legendary Spotted!", description = "You have entered legendary animal territory!", type = 'inform' })
+                end
+            elseif dist > spawnDistance + 20.0 and spawnedAnimals[z] then -- Despawn if far away
+                DeleteEntity(spawnedAnimals[z])
+                spawnedAnimals[z] = nil
+            end
+        end
+        Wait(2000)
     end
 end)
 
