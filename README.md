@@ -39,7 +39,8 @@ A remade version of rsg-trapperplus. Giving the ability for looting all creature
 - add the following to your server.cfg file : ensure qc-advanced-trapper
 
 
-![image](https://github.com/user-attachments/assets/577eab8c-08b8-4136-84e2-03bf4a22269a)
+![image](https://github.com/user-attachments/assets/bd2c9c7c-eebc-495f-9b23-3f7361c2c87f)
+
 
 
 ### IMPORTANT TO USE DEBUG THE GAME HAS OVER 450+ ANIMALS/PELTS HELP BY CONTRIBUTING TO THE RESOURCE THANKS!
