@@ -45,3 +45,8 @@ A remade version of rsg-trapperplus. Giving the ability for looting all creature
 
 
 ### IMPORTANT TO USE DEBUG THE GAME HAS OVER 450+ ANIMALS/PELTS HELP BY CONTRIBUTING TO THE RESOURCE THANKS!
+
+### Credit where due
+-[RSG Framework](https://github.com/Rexshack-RedM)
+
+Thanks to RexShack for their work with rsg-trapperplus and rsg-trapper for base work
