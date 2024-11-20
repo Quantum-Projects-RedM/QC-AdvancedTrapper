@@ -4,7 +4,7 @@ game 'rdr3'
 
 author 'Pablo Enterprises and RexShack'
 description 'qc-advanced-trapper'
-
+version '2.1.0'
 shared_scripts {
     '@rsg-core/shared/locale.lua',
     '@PolyZone/client.lua',
