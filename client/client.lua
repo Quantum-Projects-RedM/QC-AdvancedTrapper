@@ -1,11 +1,9 @@
 local RSGCore = exports['rsg-core']:GetCoreObject()
-
 -------------------------------------------
 -- prompts
 -------------------------------------------
 local SpawnedTrapperBilps = {}
 lib.locale()
-
 CreateThread(function()
     for _, v in pairs(Config.TrapperLocations) do
         if not v.showTarget then
@@ -39,7 +37,6 @@ CreateThread(function()
         end
     end
 end)
-
 ----------------------------------------
 -- open store with opening hours
 ----------------------------------------
@@ -55,7 +52,6 @@ AddEventHandler('qc-advanced-trapper:client:openstore', function()
     end
     TriggerEvent('qc-advanced-trapper:client:menu')
 end)
-
 -- get store hours function
 local GetTrapperHours = function()
     local hour = GetClockHours()
@@ -69,12 +65,10 @@ local GetTrapperHours = function()
         end
     end
 end
-
 -- get shop hours on player loading
 RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
     GetTrapperHours()
 end)
-
 -- update shop hourse every min
 CreateThread(function()
     while true do
@@ -82,7 +76,6 @@ CreateThread(function()
         Wait(60000) -- every min
     end
 end)
-
 
 -----------------------------------------------------------------------------------
 
@@ -132,7 +125,6 @@ RegisterNetEvent('qc-advanced-trapper:client:menu', function()
         },
     })
 elseif Config.Menu == 'ox_lib' then
-            -- Menu would go here.
         lib.registerContext({
             id = 'trapper_menu',
             title = Lang:t('menu.trapper_menu'),
@@ -185,7 +177,6 @@ RegisterNetEvent('qc-advanced-trapper:client:sellpelts', function()
     end)
 end)
 
-
 RegisterNetEvent('qc-advanced-trapper:client:sellcarcass', function()
     exports['progressbar']:Progress({
             name = 'make-product',
@@ -203,7 +194,6 @@ RegisterNetEvent('qc-advanced-trapper:client:sellcarcass', function()
     TriggerServerEvent('qc-advanced-trapper:server:sellcarcass')
     end)
 end)
-
 
 RegisterNetEvent('qc-advanced-trapper:client:sellfeathers', function()
     exports['progressbar']:Progress({
@@ -247,7 +237,6 @@ local function DeleteThis(holding)
         return false
     end
 end
-
 -------------------------------------------
 -- rewards
 -------------------------------------------
@@ -264,8 +253,8 @@ CreateThread(function()
         end
         if holding and holding ~= false then
             print("Holding entity detected:", GetEntityModel(holding))
-            for i = 1, #Config.Pelts do
-                local peltData = Config.Pelts[i]
+            for i = 1, #ConfigAnimals.Pelts do
+                local peltData = ConfigAnimals.Pelts[i]
                 if peltData.pelthash and pelthash == peltData.pelthash then
                     local name = peltData.name
                     local rewarditem1 = peltData.rewarditem1
@@ -274,7 +263,7 @@ CreateThread(function()
                     local rewarditem4 = peltData.rewarditem4
                     local deleted = false
                     if DoesEntityExist(holding) then
-                        deleted = DeleteEntity(holding)
+                       deleted = DeleteEntity(holding)
                         print("Entity deletion result:", deleted)
                     else
                         print("Entity does not exist or cannot be deleted")
@@ -295,12 +284,12 @@ CreateThread(function()
                             lib.notify( {title = "Hunting", description = Lang:t('error.something_went_wrong'), type = 'inform' })
                         end
                     end
-                elseif Config.Pelts[i].holding and GetEntityModel(holding) == Config.Pelts[i].holding then
-                    local name = Config.Pelts[i].name
-                    local rewarditem1 = Config.Pelts[i].rewarditem1
-                    local rewarditem2 = Config.Pelts[i].rewarditem2
-                    local rewarditem3 = Config.Pelts[i].rewarditem3
-                    local rewarditem4 = Config.Pelts[i].rewarditem4
+                elseif ConfigAnimals.Pelts[i].holding and GetEntityModel(holding) == ConfigAnimals.Pelts[i].holding then
+                    local name = ConfigAnimals.Pelts[i].name
+                    local rewarditem1 = ConfigAnimals.Pelts[i].rewarditem1
+                    local rewarditem2 = ConfigAnimals.Pelts[i].rewarditem2
+                    local rewarditem3 = ConfigAnimals.Pelts[i].rewarditem3
+                    local rewarditem4 = ConfigAnimals.Pelts[i].rewarditem4
                     Wait(5000)
                     TriggerServerEvent('qc-advanced-trapper:server:storepelt', rewarditem1) -- PELT REWARDS
                     TriggerServerEvent('qc-advanced-trapper:server:storecarcass', rewarditem2, rewarditem3, rewarditem4) -- PELT REWARDS
@@ -316,7 +305,6 @@ CreateThread(function()
     end
 end)
 
-
 -------------------------------------------
 -- CHECKS MODEL AFTER EVENT AND TRIGGERS SERVER ADDITEM EVENT
 -------------------------------------------
@@ -329,29 +317,27 @@ Citizen.CreateThread(function()
             for index = 0, size - 1 do
                 local event = GetEventAtIndex(0, index)
                 if event == 1376140891 then
-                    local view = exports["QC-AdvancedTrapper"]:DataViewNativeGetEventData(0, index, 3)
+                    local view = exports["QC-Advanced-Trapper"]:DataViewNativeGetEventData(0, index, 3)
                     local pedGathered = view['2']
                     local ped = view['0']
                     local model = GetEntityModel(pedGathered)
                     local model = model
                     local bool_unk = view['4']
-
                     local player = PlayerPedId()
                     local playergate = player == ped
-
                     -- Used to get models of animals in F8 Console menu turn on if you want to see what the hash is for animal.
                     if model and playergate == true then
                         print('Animal Gathered: ' .. model)
                     end
                    
-                    for i = 1, #Config.Animal do 
-                        if model and Config.Animal[i].modelhash ~= nil and playergate and bool_unk == 1 then
-                            local chosenmodel = Config.Animal[i].modelhash
+                    for i = 1, # ConfigAnimals.Animal do 
+                        if model and  ConfigAnimals.Animal[i].modelhash ~= nil and playergate and bool_unk == 1 then
+                            local chosenmodel =  ConfigAnimals.Animal[i].modelhash
                             if model == chosenmodel then
-                                local rewarditem2 = Config.Animal[i].rewarditem2 -- MODEL REWARDS
-                                local rewarditem3 = Config.Animal[i].rewarditem3 -- MODEL REWARDS
-                                local rewarditem4 = Config.Animal[i].rewarditem4 -- MODEL REWARDS
-                                local rewarditem5 = Config.Animal[i].rewarditem5 -- MODEL REWARDS
+                                local rewarditem2 =  ConfigAnimals.Animal[i].rewarditem2 -- MODEL REWARDS
+                                local rewarditem3 =  ConfigAnimals.Animal[i].rewarditem3 -- MODEL REWARDS
+                                local rewarditem4 =  ConfigAnimals.Animal[i].rewarditem4 -- MODEL REWARDS
+                                local rewarditem5 =  ConfigAnimals.Animal[i].rewarditem5 -- MODEL REWARDS
                                 TriggerServerEvent('qc-advanced-trapper:server:storefeathers', rewarditem2, rewarditem3, rewarditem4, rewarditem5)
                             end
                         end
@@ -361,8 +347,6 @@ Citizen.CreateThread(function()
         end
     end
 end)
-
-
 ----------------------------------------
 -- trapper shop
 -------------------------------------------
@@ -374,8 +358,6 @@ AddEventHandler('qc-advanced-trapper:client:OpenTrapperShop', function()
     ShopItems.slots = #Config.TrapperShop
     TriggerServerEvent("inventory:server:OpenInventory", "shop", "TrapperShop_"..math.random(1, 99), ShopItems)
 end)
-
-
 -----------------------------------------------------------------------------------
 
 RegisterCommand('spawn_animal', function(source, args, rawCommand)
