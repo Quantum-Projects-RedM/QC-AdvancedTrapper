@@ -317,7 +317,7 @@ Citizen.CreateThread(function()
             for index = 0, size - 1 do
                 local event = GetEventAtIndex(0, index)
                 if event == 1376140891 then
-                    local view = exports["QC-Advanced-Trapper"]:DataViewNativeGetEventData(0, index, 3)
+                    local view = exports["QC-AdvancedTrapper"]:DataViewNativeGetEventData(0, index, 3)
                     local pedGathered = view['2']
                     local ped = view['0']
                     local model = GetEntityModel(pedGathered)
