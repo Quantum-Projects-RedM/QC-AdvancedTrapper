@@ -1,10 +1,10 @@
 fx_version 'cerulean'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 game 'rdr3'
-
+version '2.0.0'
 author 'Pablo Enterprises and RexShack'
-description 'qc-advanced-trapper'
-version '2.1.0'
+description 'Advanced Hunting script with all you need :)'
+
 shared_scripts {
     '@rsg-core/shared/locale.lua',
     '@PolyZone/client.lua',
@@ -30,7 +30,8 @@ server_scripts {
 }
 
 dependencies {
-    'rsg-core'
+    'rsg-core',
+    'rsg-menu'
 }
 
 lua54 'yes'
