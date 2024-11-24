@@ -40,7 +40,7 @@ A remade version of rsg-trapperplus. a fully open source hunting script. Includi
 
 # Menu details
 
-![image](https://github.com/user-attachments/assets/bd2c9c7c-eebc-495f-9b23-3f7361c2c87f)
+https://media.discordapp.net/attachments/1303498496262934640/1303867419135184927/image.png?ex=6743ba29&is=674268a9&hm=4d9aae52989f7b71fe2b6fb798ae5acc34f42aa3942faa072f0be9e261ad4800&=&format=webp&quality=lossless
 
 
 
