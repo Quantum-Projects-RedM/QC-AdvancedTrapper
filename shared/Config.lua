@@ -10,6 +10,7 @@ Config.SpawnDistanceRadius = 30 -- the distance the animal spawns away from the 
 Config.HideTime = 10000 -- the amount of time in miliseconds that you have to hide before animal aproaches the bait
 Config.AnimalWait = 10000 -- the amount of time in miliseconds that the animal will wait at the bait until freeroam
 Config.KeyShop = 'J'
+Config.AlwaysOpen = true -- set to true to for the store to be always open, false to use the time below [IF TRUE, THE TIME BELOW WILL BE IGNORED]
 Config.OpenTime = 9 -- hrs : 24hour clock
 Config.CloseTime = 18 -- hrs : 24hour clock
 --------------------------------------------

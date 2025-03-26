@@ -40,20 +40,22 @@ end)
 ----------------------------------------
 -- open store with opening hours
 ----------------------------------------
+----- SCORPION UPDATE 26 March 2025
 AddEventHandler('qc-advanced-trapper:client:openstore', function()
-    local hour = GetClockHours()
-    if (hour < Config.OpenTime) or (hour >= Config.CloseTime) then
-        if Config.Notify == 'rnotify' then
-            TriggerEvent('rNotify:NotifyLeft', "Store Closed", "come back after "..Config.OpenTime.." am", "generic_textures", "tick", 4000)
-        elseif Config.Notify == 'ox_lib' then
-            lib.notify( {title = "Store Closed", description = "come back after "..Config.OpenTime.." am", type = 'inform' })
+    TriggerEvent('qc-advanced-trapper:client:menu')
+end)
+
+-- get store hours function
+local GetTrapperHours = function()
+    -- Check if AlwaysOpen is true
+    if Config.AlwaysOpen then
+        for k, v in pairs(SpawnedTrapperBilps) do
+            Citizen.InvokeNative(0x662D364ABF16DE2F, v, joaat('BLIP_MODIFIER_MP_COLOR_8'))
         end
         return
     end
-    TriggerEvent('qc-advanced-trapper:client:menu')
-end)
--- get store hours function
-local GetTrapperHours = function()
+    -- Check if AlwaysOpen is false then check hours
+    if Config.AlwaysOpen == false then
     local hour = GetClockHours()
     if (hour < Config.OpenTime) or (hour >= Config.CloseTime) then
         for k, v in pairs(SpawnedTrapperBilps) do
@@ -62,14 +64,17 @@ local GetTrapperHours = function()
     else
         for k, v in pairs(SpawnedTrapperBilps) do
             Citizen.InvokeNative(0x662D364ABF16DE2F, v, joaat('BLIP_MODIFIER_MP_COLOR_8'))
+            end
         end
     end
 end
+
 -- get shop hours on player loading
 RegisterNetEvent('RSGCore:Client:OnPlayerLoaded', function()
     GetTrapperHours()
 end)
--- update shop hourse every min
+
+-- update shop hours every min
 CreateThread(function()
     while true do
         GetTrapperHours()
