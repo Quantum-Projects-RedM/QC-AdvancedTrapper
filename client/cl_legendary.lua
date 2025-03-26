@@ -247,10 +247,10 @@ end)
 
 AddEventHandler('onResourceStop', function(resourceName)
     if GetCurrentResourceName() == resourceName then
-        if IsEntityAnObject(baitProp) then
+        if baitProp ~= nil and DoesEntityExist(baitProp) then
             DeleteEntity(baitProp)
         end
-        if IsEntityAPed(animal) then
+        if animal ~= nil and DoesEntityExist(animal) then
             DeleteEntity(animal)
         end
     end
