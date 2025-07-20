@@ -32,8 +32,7 @@ server_scripts {
 }
 
 dependencies {
-    'rsg-core',
-    'rsg-menu'
+    'rsg-core'
 }
 
 lua54 'yes'
